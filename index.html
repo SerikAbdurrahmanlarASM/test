@@ -1,0 +1,483 @@
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Antalya Serik Abdurrahmanlar ASM İlaç Takip Sistemi</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; background-color: #f7f9fc; }
+    h2 { color: #145A32; }
+    input { margin-bottom: 15px; padding: 8px; width: 320px; font-size: 16px; }
+    table { width: 100%; border-collapse: collapse; background-color: #fff; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+    th { background-color: #D4EFDF; }
+    tr:hover { background-color: #f1f9ff; }
+    mark { background-color: yellow; font-weight: bold; }
+    .note { margin-bottom: 20px; font-size: 15px; background-color: #e9f5e9; padding: 10px; border-left: 4px solid #28B463; }
+  </style>
+</head>
+<body>
+
+  <h2>Antalya Serik Abdurrahmanlar ASM İlaç Takip Sistemi</h2>
+  <div class="note">
+    NOT 2:VERİ TABANINDAKİ İLAÇLAR İHTİYAÇ SAHİPLERİNE VE GEREKEN HASTALARA  DOĞRU VE GÜVENİLİR BİÇİMDE İLETİLİP BU SAYEDE İLAÇ İSRAFININ ÖNÜNE GEÇİLMESİ PLANLANMAKTADIR.<br>NOT 3:BU İLAÇLAR SATILIK VEYA MADDİ KARŞILIKLI DEĞİLDİR.UYGUN HASTA GRUBUNA VERİLECEK OLUP KÖTÜYE KULLANIMIN ÖNÜNE GEÇİLMESİ İÇİN SAĞLIK PROFESYONELİ/ECZACI KOORDİNASYONU İLE KARAR VERİLECEKTİR.<br>Abdurrahmanlar Aile Sağlığı Merkezi İlaç Takip Sistemi
+  </div>
+  <input type="text" id="searchInput" placeholder="İlaç adı ya da etken madde yazınız...">
+
+  <table id="medicineTable">
+    <thead>
+      <tr>
+        <th>Son Kullanım Tarihi</th>
+        <th>İlaç Adı ve Dozajı</th>
+        <th>Etken Madde</th>
+        <th>Stok Adedi</th>
+        <th>Grup</th>
+        <th>KÜB/KT Linki</th>
+      </tr>
+    </thead>
+    <tbody>
+     [
+  {
+    "Son kullanım tarihi": "06/2026",
+    "İlaç Adı/doz": "BRONKOLIN 300 RETARD TABLET",
+    "Etken madde/doz": "TEOFİLİN",
+    "Stok adedi": 1,
+    "Grup": "ASTIM/KOAH",
+    "küb/kt": "https://titck.gov.tr/storage/kubKtAttachments/102c251198748.pdf",
+    "Verilen hasta ve tarih": ""
+  },
+  {
+    "Son kullanım tarihi": "09/2026",
+    "İlaç Adı/doz": "BRONKOLIN 300 RETARD TABLET",
+    "Etken madde/doz": "TEOFİLİN",
+    "Stok adedi": 1,
+    "Grup": "ASTIM/KOAH",
+    "küb/kt": "https://titck.gov.tr/storage/kubKtAttachments/102c251198748.pdf",
+    "Verilen hasta ve tarih": ""
+  },
+  {
+    "Son kullanım tarihi": "12/2026",
+    "İlaç Adı/doz": "BRONKOLIN 300 RETARD TABLET",
+    "Etken madde/doz": "TEOFİLİN",
+    "Stok adedi": 2,
+    "Grup": "ASTIM/KOAH",
+    "küb/kt": "https://titck.gov.tr/storage/kubKtAttachments/102c251198748.pdf",
+    "Verilen hasta ve tarih": ""
+  },
+  {
+    "Son kullanım tarihi": "02/2027",
+    "İlaç Adı/doz": "BRONKOLIN 300 RETARD TABLET",
+    "Etken madde/doz": "TEOFİLİN",
+    "Stok adedi": 1,
+    "Grup": "ASTIM/KOAH",
+    "küb/kt": "https://titck.gov.tr/storage/kubKtAttachments/102c251198748.pdf",
+    "Verilen hasta ve tarih": ""
+  },
+  {
+    "Son kullanım tarihi": "09/2027",
+    "İlaç Adı/doz": "BRONKOLIN 300 RETARD TABLET",
+    "Etken madde/doz": "TEOFİLİN",
+    "Stok adedi": 2,
+    "Grup": "ASTIM/KOAH",
+    "küb/kt": "https://titck.gov.tr/storage/kubKtAttachments/102c251198748.pdf",
+    "Verilen hasta ve tarih": ""
+  },
+  {
+    "Son kullanım tarihi": "06/2026",
+    "İlaç Adı/doz": "LİPANTHYL 267 MG SERT KAPSÜL",
+    "Etken madde/doz": "FENOFİBRAT",
+    "Stok adedi": 3,
+    "Grup": "HİPERLİPİDEMİ",
+    "küb/kt": "https://titck.gov.tr/storage/Archive/2021/kubKtAttachments/LPANTHYL267MGSERTKAPSLKB_a68b6754-3680-473c-b09c-96772d02b9ac.pdf",
+    "Verilen hasta ve tarih": ""
+  },
+  {
+    "Son kullanım tarihi": "09/2028",
+    "İlaç Adı/doz": "GLİFOR 1000 MG FİLM TABLET",
+    "Etken madde/doz": "METFORMİN HİDROKLORÜR",
+    "Stok adedi": 2,
+    "Grup": "DİYABET",
+    "küb/kt": "https://titck.gov.tr/storage/kubKtAttachments/dJZO1IGfwwHJz.pdf",
+    "Verilen hasta ve tarih": ""
+  },
+  {
+    "Son kullanım tarihi": "01/2028",
+    "İlaç Adı/doz": "GLİFOR 1000 MG FİLM TABLET",
+    "Etken madde/doz": "METFORMİN HİDROKLORÜR",
+    "Stok adedi": 2,
+    "Grup": "DİYABET",
+    "küb/kt": "https://titck.gov.tr/storage/kubKtAttachments/dJZO1IGfwwHJz.pdf",
+    "Verilen hasta ve tarih": ""
+  },
+  {
+    "Son kullanım tarihi": "8/2027",
+    "İlaç Adı/doz": "GLİFOR 1000 MG FİLM TABLET",
+    "Etken madde/doz": "METFORMİN HİDROKLORÜR",
+    "Stok adedi": 1,
+    "Grup": "DİYABET",
+    "küb/kt": "https://titck.gov.tr/storage/kubKtAttachments/dJZO1IGfwwHJz.pdf",
+    "Verilen hasta ve tarih": ""
+  },
+  {
+    "Son kullanım tarihi": "3/2027",
+    "İlaç Adı/doz": "GLİFOR 1000 MG FİLM TABLET",
+    "Etken madde/doz": "METFORMİN HİDROKLORÜR",
+    "Stok adedi": 1,
+    "Grup": "DİYABET",
+    "küb/kt": "https://titck.gov.tr/storage/kubKtAttachments/dJZO1IGfwwHJz.pdf",
+    "Verilen hasta ve tarih": ""
+  },
+  {
+    "Son kullanım tarihi": "11/2027",
+    "İlaç Adı/doz": "TEGLIX 120MG FILM TABLET",
+    "Etken madde/doz": "NATEGLİNİD",
+    "Stok adedi": 1,
+    "Grup": "DİYABET",
+    "küb/kt": "https://titck.gov.tr/storage/Archive/2024/kubKtAttachments/kubtemiz_47e90283-b9cc-4177-a5ac-df13571649be.pdf",
+    "Verilen hasta ve tarih": ""
+  },
+  {
+    "Son kullanım tarihi": "02/2027",
+    "İlaç Adı/doz": "TEGLIX 120MG FILM TABLET",
+    "Etken madde/doz": "NATEGLİNİD",
+    "Stok adedi": 2,
+    "Grup": "DİYABET",
+    "küb/kt": "https://titck.gov.tr/storage/Archive/2024/kubKtAttachments/kubtemiz_47e90283-b9cc-4177-a5ac-df13571649be.pdf",
+    "Verilen hasta ve tarih": ""
+  },
+  {
+    "Son kullanım tarihi": "11/2026",
+    "İlaç Adı/doz": "TEGLIX 120MG FILM TABLET",
+    "Etken madde/doz": "NATEGLİNİD",
+    "Stok adedi": 4,
+    "Grup": "DİYABET",
+    "küb/kt": "https://titck.gov.tr/storage/Archive/2024/kubKtAttachments/kubtemiz_47e90283-b9cc-4177-a5ac-df13571649be.pdf",
+    "Verilen hasta ve tarih": ""
+  },
+  {
+    "Son kullanım tarihi": "09/2026",
+    "İlaç Adı/doz": "TEGLIX 120MG FILM TABLET",
+    "Etken madde/doz": "NATEGLİNİD",
+    "Stok adedi": 3,
+    "Grup": "DİYABET",
+    "küb/kt": "https://titck.gov.tr/storage/Archive/2024/kubKtAttachments/kubtemiz_47e90283-b9cc-4177-a5ac-df13571649be.pdf",
+    "Verilen hasta ve tarih": ""
+  },
+  {
+    "Son kullanım tarihi": "08/2026",
+    "İlaç Adı/doz": "TEGLIX 120MG FILM TABLET",
+    "Etken madde/doz": "NATEGLİNİD",
+    "Stok adedi": 2,
+    "Grup": "DİYABET",
+    "küb/kt": "https://titck.gov.tr/storage/Archive/2024/kubKtAttachments/kubtemiz_47e90283-b9cc-4177-a5ac-df13571649be.pdf",
+    "Verilen hasta ve tarih": ""
+  },
+  {
+    "Son kullanım tarihi": "07/2026",
+    "İlaç Adı/doz": "TEGLIX 120MG FILM TABLET",
+    "Etken madde/doz": "NATEGLİNİD",
+    "Stok adedi": 1,
+    "Grup": "DİYABET",
+    "küb/kt": "https://titck.gov.tr/storage/Archive/2024/kubKtAttachments/kubtemiz_47e90283-b9cc-4177-a5ac-df13571649be.pdf",
+    "Verilen hasta ve tarih": ""
+  },
+  {
+    "Son kullanım tarihi": "06/2026",
+    "İlaç Adı/doz": "TEGLIX 120MG FILM TABLET",
+    "Etken madde/doz": "NATEGLİNİD",
+    "Stok adedi": 2,
+    "Grup": "DİYABET",
+    "küb/kt": "https://titck.gov.tr/storage/Archive/2024/kubKtAttachments/kubtemiz_47e90283-b9cc-4177-a5ac-df13571649be.pdf",
+    "Verilen hasta ve tarih": ""
+  },
+  {
+    "Son kullanım tarihi": "06/2029",
+    "İlaç Adı/doz": "GLİFİX 45 MG TABLET",
+    "Etken madde/doz": "PİOGLİTAZON",
+    "Stok adedi": 3,
+    "Grup": "DİYABET",
+    "küb/kt": "https://titck.gov.tr/storage/Archive/2019/kubKtAttachments/glifix%2045%20KUB%20YAYIN.pdf_aeaae17a-dba1-47d8-a488-9c1d1056dc3f.pdf",
+    "Verilen hasta ve tarih": ""
+  },
+  {
+    "Son kullanım tarihi": "09/2027",
+    "İlaç Adı/doz": "GLİFİX 45 MG TABLET",
+    "Etken madde/doz": "PİOGLİTAZON",
+    "Stok adedi": 2,
+    "Grup": "DİYABET",
+    "küb/kt": "https://titck.gov.tr/storage/Archive/2019/kubKtAttachments/glifix%2045%20KUB%20YAYIN.pdf_aeaae17a-dba1-47d8-a488-9c1d1056dc3f.pdf",
+    "Verilen hasta ve tarih": ""
+  },
+  {
+    "Son kullanım tarihi": "12/2025",
+    "İlaç Adı/doz": "LERCADİP 10 MG FILM KAPLı TABLET",
+    "Etken madde/doz": "LERKANİDİPİN HİDROKLORÜR",
+    "Stok adedi": 2,
+    "Grup": "ANTİHİPERTANSİF",
+    "küb/kt": "https://titck.gov.tr/storage/Archive/2025/kubKtAttachments/LERCADP10mgKB_20_05_2025.pdf",
+    "Verilen hasta ve tarih": ""
+  },
+  {
+    "Son kullanım tarihi": "10/2026",
+    "İlaç Adı/doz": "LERCADİP 10 MG FILM KAPLı TABLET",
+    "Etken madde/doz": "LERKANİDİPİN HİDROKLORÜR",
+    "Stok adedi": 2,
+    "Grup": "ANTİHİPERTANSİF",
+    "küb/kt": "https://titck.gov.tr/storage/Archive/2025/kubKtAttachments/LERCADP10mgKB_20_05_2025.pdf",
+    "Verilen hasta ve tarih": ""
+  },
+  {
+    "Son kullanım tarihi": "4/2026",
+    "İlaç Adı/doz": "LERCADİP 10 MG FILM KAPLı TABLET",
+    "Etken madde/doz": "LERKANİDİPİN HİDROKLORÜR",
+    "Stok adedi": 3,
+    "Grup": "ANTİHİPERTANSİF",
+    "küb/kt": "https://titck.gov.tr/storage/Archive/2025/kubKtAttachments/LERCADP10mgKB_20_05_2025.pdf",
+    "Verilen hasta ve tarih": ""
+  },
+  {
+    "Son kullanım tarihi": "4/2026",
+    "İlaç Adı/doz": "LERCADİP 20 MG FILM KAPLı TABLET",
+    "Etken madde/doz": "LERKANİDİPİN HİDROKLORÜR",
+    "Stok adedi": 2,
+    "Grup": "ANTİHİPERTANSİF",
+    "küb/kt": "https://titck.gov.tr/storage/Archive/2025/kubKtAttachments/LERCADP20mgKB_20_05_2025.pdf",
+    "Verilen hasta ve tarih": ""
+  },
+  {
+    "Son kullanım tarihi": "09/2027",
+    "İlaç Adı/doz": "BENİPİN 8 MG FİLM TABLET",
+    "Etken madde/doz": "BENİDİPİN HİDROKLORÜR",
+    "Stok adedi": 1,
+    "Grup": "ANTİHİPERTANSİF",
+    "küb/kt": "https://titck.gov.tr/storage/kubKtAttachments/f016e08038777.pdf",
+    "Verilen hasta ve tarih": ""
+  },
+  {
+    "Son kullanım tarihi": "07/2027",
+    "İlaç Adı/doz": "BENİPİN 8 MG FİLM TABLET",
+    "Etken madde/doz": "BENİDİPİN HİDROKLORÜR",
+    "Stok adedi": 2,
+    "Grup": "ANTİHİPERTANSİF",
+    "küb/kt": "https://titck.gov.tr/storage/kubKtAttachments/f016e08038777.pdf",
+    "Verilen hasta ve tarih": ""
+  },
+  {
+    "Son kullanım tarihi": "04/2027",
+    "İlaç Adı/doz": "CANDEXİL PLUS 32 MG/12.5 MG TABLET",
+    "Etken madde/doz": "KANDESARTAN SİLEKSETİL , HİDROKLOROTİYAZİD",
+    "Stok adedi": 3,
+    "Grup": "ANTİHİPERTANSİF KOMBİNE",
+    "küb/kt": "https://titck.gov.tr/storage/Archive/2025/kubKtAttachments/1311kub32125_06_05_2025.pdf",
+    "Verilen hasta ve tarih": ""
+  },
+  {
+    "Son kullanım tarihi": "09/2027",
+    "İlaç Adı/doz": "VASOXEN PLUS 5 MG/12,5 MG FILM KAPLI TABLET",
+    "Etken madde/doz": "NEBİVOLOL , HİDROKLOROTİYAZİD",
+    "Stok adedi": 2,
+    "Grup": "ANTİHİPERTANSİF KOMBİNE",
+    "küb/kt": "https://titck.gov.tr/storage/Archive/2022/kubKtAttachments/Vasoxen12.5KB_ba2da51a-5d0b-443f-a0f6-998410e7ed25.pdf",
+    "Verilen hasta ve tarih": ""
+  },
+  {
+    "Son kullanım tarihi": "11/2025",
+    "İlaç Adı/doz": "İRDAPİN 150 MG/5 MG FİLM KAPLI TABLET",
+    "Etken madde/doz": "İRBESARTAN , AMLODİPİN",
+    "Stok adedi": 2,
+    "Grup": "ANTİHİPERTANSİF KOMBİNE",
+    "küb/kt": "https://titck.gov.tr/storage/Archive/2025/kubKtAttachments/RDAPN1505KBSON_17_10_2025.pdf",
+    "Verilen hasta ve tarih": ""
+  },
+  {
+    "Son kullanım tarihi": "02/2027",
+    "İlaç Adı/doz": "ZOPROTEC PLUS 30 MG/12,5 MG FILM KAPLI TABLET",
+    "Etken madde/doz": "ZOFENOPRİL KALSİYUM , HİDROKLOROTİYAZİD",
+    "Stok adedi": 4,
+    "Grup": "ANTİHİPERTANSİF KOMBİNE",
+    "küb/kt": "https://titck.gov.tr/storage/Archive/2024/kubKtAttachments/kub_9d967c46-f3cd-499b-a5b5-1f9c87a40856.pdf",
+    "Verilen hasta ve tarih": ""
+  },
+  {
+    "Son kullanım tarihi": "12/2027",
+    "İlaç Adı/doz": "CO-İRDA 300 MG / 25 MG FİLM KAPLI TABLET",
+    "Etken madde/doz": "İRBESARTAN , HİDROKLOROTİYAZİD",
+    "Stok adedi": 3,
+    "Grup": "ANTİHİPERTANSİF KOMBİNE",
+    "küb/kt": "https://titck.gov.tr/storage/Archive/2025/kubKtAttachments/kub30025_06_08_2025.pdf",
+    "Verilen hasta ve tarih": ""
+  },
+  {
+    "Son kullanım tarihi": "01/2026",
+    "İlaç Adı/doz": "CIBADREX 10/12.5 MG FILM TABLET",
+    "Etken madde/doz": "BENAZEPRİL HİDROKLORÜR , HİDROKLOROTİYAZİD",
+    "Stok adedi": 2,
+    "Grup": "ANTİHİPERTANSİF KOMBİNE",
+    "küb/kt": "https://titck.gov.tr/storage/Archive/2022/kubKtAttachments/kubtemiz_b5b9f4fb-dd8e-4c65-bb88-ca539191cc97.pdf",
+    "Verilen hasta ve tarih": ""
+  },
+  {
+    "Son kullanım tarihi": "09/2026",
+    "İlaç Adı/doz": "CO-DİOVAN 320/12.5 MG FİLM KAPLI TABLET",
+    "Etken madde/doz": "VALSARTAN , HİDROKLOROTİYAZİD",
+    "Stok adedi": 2,
+    "Grup": "ANTİHİPERTANSİF KOMBİNE",
+    "küb/kt": "https://titck.gov.tr/storage/Archive/2025/kubKtAttachments/codiovan32012.5kub_06_08_2025.pdf",
+    "Verilen hasta ve tarih": ""
+  },
+  {
+    "Son kullanım tarihi": "12/2025",
+    "İlaç Adı/doz": "SARILEN PLUS 100 MG/25 MG FILM KAPLI TABLET",
+    "Etken madde/doz": "LOSARTAN POTASYUM ,  HİDROKLOROTİYAZİD",
+    "Stok adedi": 1,
+    "Grup": "ANTİHİPERTANSİF KOMBİNE",
+    "küb/kt": "https://titck.gov.tr/storage/Archive/2025/kubKtAttachments/UYGUNKBSARLENPLUS10025_20_05_2025.pdf",
+    "Verilen hasta ve tarih": ""
+  },
+  {
+    "Son kullanım tarihi": "08/2026",
+    "İlaç Adı/doz": "HIPERSAR 20 MG FILM TABLET",
+    "Etken madde/doz": "OLMESARTAN MEDOKSOMİL",
+    "Stok adedi": 1,
+    "Grup": "ANTİHİPERTANSİF",
+    "küb/kt": "https://titck.gov.tr/storage/kubKtAttachments/7838f9e088513.pdf",
+    "Verilen hasta ve tarih": ""
+  },
+  {
+    "Son kullanım tarihi": "03/2026",
+    "İlaç Adı/doz": "TRIPLIXAM 10 MG/2.5 MG/10 MG FILM KAPLı TABLET",
+    "Etken madde/doz": "PERİNDOPRİL ARJİNİN , HİDROKLOROTİYAZİD , AMLODİPİN",
+    "Stok adedi": 1,
+    "Grup": "ANTİHİPERTANSİF KOMBİNE",
+    "küb/kt": "https://titck.gov.tr/storage/Archive/2023/kubKtAttachments/kb_4661181a-ff11-45db-85d2-1e262f4092ab.pdf",
+    "Verilen hasta ve tarih": ""
+  },
+  {
+    "Son kullanım tarihi": "04/2027",
+    "İlaç Adı/doz": "COVERAM 10MG/10 MG TABLET",
+    "Etken madde/doz": "PERİNDOPRİL ARJİNİN , AMLODİPİN",
+    "Stok adedi": 1,
+    "Grup": "ANTİHİPERTANSİF KOMBİNE",
+    "küb/kt": "https://titck.gov.tr/storage/Archive/2023/kubKtAttachments/COVERAM10mg10mgKB_0ba6fa61-aa45-48cb-8154-20089b98dd4f.pdf",
+    "Verilen hasta ve tarih": ""
+  },
+  {
+    "Son kullanım tarihi": "05/2027",
+    "İlaç Adı/doz": "COVERSYL PLUS 5 MG/1.25 MG FİLM KAPLI TABLET",
+    "Etken madde/doz": "PERİNDOPRİL ARJİNİN ,  İNDAPAMİD",
+    "Stok adedi": 1,
+    "Grup": "ANTİHİPERTANSİF KOMBİNE",
+    "küb/kt": "https://titck.gov.tr/storage/Archive/2022/kubKtAttachments/CoversylPlus5mg125mgfilmkapltabletKUB_ac62a587-22d1-4a32-8f4e-7c97e6f3ecfa.pdf",
+    "Verilen hasta ve tarih": ""
+  },
+  {
+    "Son kullanım tarihi": "03/2027",
+    "İlaç Adı/doz": "ALDACTONE-A 25 MG TABLET",
+    "Etken madde/doz": "SPİRONOLAKTON",
+    "Stok adedi": 3,
+    "Grup": "ANTİHİPERTANSİF",
+    "küb/kt": "https://titck.gov.tr/storage/Archive/2022/kubKtAttachments/25kb_1099b408-328c-4e66-ab7d-cec329bcd699.pdf",
+    "Verilen hasta ve tarih": ""
+  },
+  {
+    "Son kullanım tarihi": "02/2026",
+    "İlaç Adı/doz": "ALDACTONE-A 25 MG TABLET",
+    "Etken madde/doz": "SPİRONOLAKTON",
+    "Stok adedi": 2,
+    "Grup": "ANTİHİPERTANSİF",
+    "küb/kt": "https://titck.gov.tr/storage/Archive/2022/kubKtAttachments/25kb_1099b408-328c-4e66-ab7d-cec329bcd699.pdf",
+    "Verilen hasta ve tarih": ""
+  },
+  {
+    "Son kullanım tarihi": "12/2025",
+    "İlaç Adı/doz": "ALDACTONE-A 25 MG TABLET",
+    "Etken madde/doz": "SPİRONOLAKTON",
+    "Stok adedi": 1,
+    "Grup": "ANTİHİPERTANSİF",
+    "küb/kt": "https://titck.gov.tr/storage/Archive/2022/kubKtAttachments/25kb_1099b408-328c-4e66-ab7d-cec329bcd699.pdf",
+    "Verilen hasta ve tarih": ""
+  },
+  {
+    "Son kullanım tarihi": "02/2027",
+    "İlaç Adı/doz": "TENSINOR 100 MG TABLET",
+    "Etken madde/doz": "ATENOLOL",
+    "Stok adedi": 4,
+    "Grup": "ANTİHİPERTANSİF, ANTİANJİNAL, ANTİARİTMİK",
+    "küb/kt": "https://titck.gov.tr/storage/Archive/2025/kubKtAttachments/yaynlanacaktensinor501311kub_04_08_2025.pdf",
+    "Verilen hasta ve tarih": ""
+  },
+  {
+    "Son kullanım tarihi": "06/2026",
+    "İlaç Adı/doz": "MONOKET LONG 50 MG RETARD KAPSÜL",
+    "Etken madde/doz": "İSOSORBİT-5-MONONİTRAT",
+    "Stok adedi": 2,
+    "Grup": "KORONER ARTER HASTALIĞI, ANTİANJİNAL",
+    "küb/kt": "https://titck.gov.tr/storage/kubKtAttachments/976678f460204.pdf",
+    "Verilen hasta ve tarih": ""
+  },
+  {
+    "Son kullanım tarihi": "03/2026",
+    "İlaç Adı/doz": "DİGOXİN-ASSOS 0,25 MG TABLET",
+    "Etken madde/doz": "DİGOKSİN",
+    "Stok adedi": 1,
+    "Grup": "SVT, KALP YETMEZLİĞİ",
+    "küb/kt": "https://titck.gov.tr/storage/kubKtAttachments/FigMf3eckYGC9.pdf",
+    "Verilen hasta ve tarih": ""
+  },
+  {
+    "Son kullanım tarihi": "02/2026",
+    "İlaç Adı/doz": "RAZINA 500 MG UZATıLMış SALıMLı TABLET",
+    "Etken madde/doz": "RANOLAZİN",
+    "Stok adedi": 2,
+    "Grup": "ANTİANJİNAL",
+    "küb/kt": "https://titck.gov.tr/storage/Archive/2021/kubKtAttachments/razina500mgkub_37712f2d-0e0b-45be-95d7-60b3a581a056.pdf",
+    "Verilen hasta ve tarih": ""
+  },
+  {
+    "Son kullanım tarihi": "10/2025",
+    "İlaç Adı/doz": "deneme",
+    "Etken madde/doz": "deneme",
+    "Stok adedi": 1,
+    "Grup": "deneme",
+    "küb/kt": "",
+    "Verilen hasta ve tarih": ""
+  }
+]
+    </tbody>
+  </table>
+
+  <script>
+    const searchInput = document.getElementById("searchInput");
+    searchInput.addEventListener("input", () => {
+      const term = searchInput.value.trim().toLocaleLowerCase('tr-TR');
+      const rows = document.querySelectorAll("#medicineTable tbody tr");
+      rows.forEach(row => {
+        const text = row.innerText.toLocaleLowerCase('tr-TR');
+        row.style.display = (term.length < 3 || text.includes(term)) ? "" : "none";
+        if (term.length >= 3) {
+          row.innerHTML = row.innerHTML.replace(/<mark>|<\/mark>/g, '');
+          row.querySelectorAll("td").forEach(cell => {
+            const inner = cell.innerText;
+            const regex = new RegExp('(' + term + ')', 'gi');
+            cell.innerHTML = inner.replace(regex, "<mark>$1</mark>");
+          });
+        }
+      });
+    });
+  </script>
+
+
+<script>
+  async function checkLink(el) {
+    const url = el.href;
+    try {
+      const res = await fetch(url, {{ method: 'HEAD' }});
+      if (!res.ok) { alert("Uyarı: Bu bağlantı şu anda erişilemez olabilir."); }
+    } catch (e) {
+      alert("Uyarı: Bu bağlantıya erişilemiyor (internet sorunu veya geçersiz link).");
+    }
+  }
+</script>
+</body>
+
+</html>
