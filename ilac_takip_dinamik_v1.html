@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Abdurrahmanlar ASM İlaç Takip Sistemi – Dinamik</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f7f8; padding: 20px; }
+        h1 { color: #2C3E50; }
+        form { margin-bottom: 20px; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 0 5px #ccc; }
+        input, select, button { padding: 8px; margin: 5px; width: 90%; }
+        button { width: auto; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        th { background-color: #d5f3d5; }
+        mark { background: yellow; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<h1>Abdurrahmanlar ASM İlaç Takip Sistemi – Dinamik</h1>
+
+<!-- İlaç Ekleme Formu -->
+<form id="addForm">
+    <h3>İlaç Ekle</h3>
+    <input required name="Son Kullanım Tarihi" placeholder="Son Kullanım Tarihi (Örn: 12.2026)" />
+    <input required name="İlaç Adı / Dozaj" placeholder="İlaç Adı / Dozaj" />
+    <input required name="Etken Madde / Dozaj" placeholder="Etken Madde / Dozaj" />
+    <input required type="number" name="Stok Adedi" placeholder="Stok Adedi" />
+    <input name="Ana Grup (ASTIM / KOAH vs)" placeholder="Ana Grup (opsiyonel)" />
+    <input name="KÜB / KT Linki" placeholder="KÜB / KT Linki (opsiyonel)" />
+    <button type="submit">Ekle</button>
+    <div id="addMsg"></div>
+</form>
+
+<!-- Stoktan Düşme Formu -->
+<form id="removeForm">
+    <h3>İlaç Çıkışı (Stoktan Düş)</h3>
+    <input required id="searchName" placeholder="İlaç adı (örn: Coversyl)" />
+    <select required id="dateSelect"></select>
+    <input required type="number" id="removeQty" placeholder="Kaç adet düşülecek?" />
+    <input required id="givenTo" placeholder="Verilen Hasta" />
+    <input required id="givenDate" placeholder="Veriliş Tarihi (örn: 29.10.2025)" />
+    <button type="submit">Stoktan Düş</button>
+    <div id="removeMsg"></div>
+</form>
+
+<!-- Mevcut Stok Görüntüleme -->
+<table id="stockTable">
+    <thead>
+        <tr>
+            <th>Son Kullanım Tarihi</th>
+            <th>İlaç Adı</th>
+            <th>Etken Madde</th>
+            <th>Stok Adedi</th>
+            <th>Grup</th>
+            <th>KÜB/KT</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+<script>
+const api = "https://script.google.com/macros/s/AKfycbx7JxLMlY6F08ltji1LEfXD_uumqaxIjq3l4TfrbichvzPD0sFm-Ki3fGw_aCyLhTc/exec";
+
+// İlaç ekleme
+document.getElementById('addForm').onsubmit = async (e) => {
+    e.preventDefault();
+    const data = Object.fromEntries(new FormData(e.target).entries());
+    data["Verilen Tarih"] = "";
+    data["Verilen Hasta"] = "";
+    const res = await fetch(api, {
+        method: "POST",
+        body: JSON.stringify(data)
+    });
+    document.getElementById("addMsg").innerText = await res.text();
+    e.target.reset();
+    loadStock();
+};
+
+// Stok görüntüleme
+async function loadStock() {
+    const res = await fetch(api);
+    const data = await res.json();
+    const tbody = document.querySelector("#stockTable tbody");
+    tbody.innerHTML = "";
+    data.forEach(row => {
+        if (row["İlaç Adı / Dozaj"] && row["Stok Adedi"]) {
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+                <td>${row["Son Kullanım Tarihi"]}</td>
+                <td>${row["İlaç Adı / Dozaj"]}</td>
+                <td>${row["Etken Madde / Dozaj"]}</td>
+                <td>${row["Stok Adedi"]}</td>
+                <td>${row["Ana Grup (ASTIM / KOAH vs)"]}</td>
+                <td><a href="${row["KÜB / KT Linki"]}" target="_blank">Link</a></td>
+            `;
+            tbody.appendChild(tr);
+        }
+    });
+}
+
+// Aramaya göre tarihler getir
+document.getElementById("searchName").oninput = async (e) => {
+    const name = e.target.value.trim().toLowerCase();
+    const res = await fetch(api);
+    const data = await res.json();
+    const select = document.getElementById("dateSelect");
+    select.innerHTML = "";
+    const filtered = data.filter(row => row["İlaç Adı / Dozaj"]?.toLowerCase().includes(name));
+    filtered.forEach(row => {
+        const option = document.createElement("option");
+        option.value = JSON.stringify(row);
+        option.innerText = `${row["Son Kullanım Tarihi"]} — ${row["Stok Adedi"]} adet`;
+        select.appendChild(option);
+    });
+};
+
+// Stok düşme
+document.getElementById("removeForm").onsubmit = async (e) => {
+    e.preventDefault();
+    const selectedRow = JSON.parse(document.getElementById("dateSelect").value);
+    const removeQty = parseInt(document.getElementById("removeQty").value);
+    const kalan = parseInt(selectedRow["Stok Adedi"]) - removeQty;
+    const body = {
+        "Son Kullanım Tarihi": selectedRow["Son Kullanım Tarihi"],
+        "İlaç Adı / Dozaj": selectedRow["İlaç Adı / Dozaj"],
+        "Etken Madde / Dozaj": selectedRow["Etken Madde / Dozaj"],
+        "Stok Adedi": kalan,
+        "Ana Grup (ASTIM / KOAH vs)": selectedRow["Ana Grup (ASTIM / KOAH vs)"],
+        "KÜB / KT Linki": selectedRow["KÜB / KT Linki"],
+        "Verilen Tarih": document.getElementById("givenDate").value,
+        "Verilen Hasta": document.getElementById("givenTo").value
+    };
+    const res = await fetch(api, { method: "POST", body: JSON.stringify(body) });
+    document.getElementById("removeMsg").innerText = await res.text();
+    e.target.reset();
+    loadStock();
+};
+
+loadStock();
+</script>
+
+</body>
+</html>
