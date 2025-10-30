@@ -488,3 +488,118 @@
 </body>
 
 </html>
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <title>ASM İlaç Takip – Liste Üzerinden Güvenli Düşüm (Canlı Güncellenen)</title>
+  <style>
+    body { font-family: Arial, sans-serif; background-color: #f9fbfc; padding: 20px; }
+    h1 { color: #2C3E50; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; background: #fff; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+    th { background-color: #d5f3d5; }
+    button { padding: 5px 10px; margin: 3px; cursor: pointer; }
+    .form-section { margin-top: 30px; background: #eef; padding: 15px; border-radius: 8px; display: none; }
+    .highlight { background: #d0f0d0; }
+  </style>
+</head>
+<body>
+
+<h1>ASM İlaç Takip Sistemi – Liste Üzerinden Düşüm + Canlı Güncelleme</h1>
+
+<div id="tableContainer">⏳ İlaçlar yükleniyor...</div>
+
+<div id="formSection" class="form-section">
+  <h3>Seçilen İlaç: <span id="selectedDrugName"></span></h3>
+  <input type="number" id="removeQty" placeholder="Kaç adet düşülecek?" required />
+  <input type="text" id="givenTo" placeholder="Verilen Hasta" required />
+  <input type="text" id="givenDate" placeholder="Veriliş Tarihi (örn: 29.10.2025)" required />
+  <button onclick="confirmAndSubmit()">💊 Stoktan Düş</button>
+  <div id="statusMsg"></div>
+</div>
+
+<script>
+const api = "https://script.google.com/macros/s/AKfycbx7JxLMlY6F08ltji1LEfXD_uumqaxIjq3l4TfrbichvzPD0sFm-Ki3fGw_aCyLhTc/exec";
+let selectedRow = null;
+
+async function loadTable() {
+  const res = await fetch(api + '?t=' + Date.now());
+  const data = await res.json();
+
+  let html = `<table><thead>
+    <tr><th>İlaç Adı</th><th>SKT</th><th>Etken Madde</th><th>Stok</th><th>İşlem</th></tr>
+  </thead><tbody>`;
+
+  data.forEach((row, index) => {
+    if (row["İlaç Adı / Dozaj"] && row["Stok Adedi"]) {
+      const rowId = `row${index}`;
+      html += `<tr id="${rowId}">
+        <td>${row["İlaç Adı / Dozaj"]}</td>
+        <td>${row["Son Kullanım Tarihi"]}</td>
+        <td>${row["Etken Madde / Dozaj"]}</td>
+        <td>${row["Stok Adedi"]}</td>
+        <td><button onclick='selectRow(${JSON.stringify(row)}, "${rowId}")'>Stoktan Düş</button></td>
+      </tr>`;
+    }
+  });
+
+  html += "</tbody></table>";
+  document.getElementById("tableContainer").innerHTML = html;
+}
+
+function selectRow(row, rowId) {
+  selectedRow = row;
+  document.querySelectorAll("tr").forEach(tr => tr.classList.remove("highlight"));
+  document.getElementById(rowId).classList.add("highlight");
+
+  document.getElementById("selectedDrugName").innerText = row["İlaç Adı / Dozaj"] + " / SKT: " + row["Son Kullanım Tarihi"];
+  document.getElementById("formSection").style.display = "block";
+}
+
+function confirmAndSubmit() {
+  if (!selectedRow) return;
+  const adet = parseInt(document.getElementById("removeQty").value);
+  const hasta = document.getElementById("givenTo").value.trim();
+  const tarih = document.getElementById("givenDate").value.trim();
+
+  if (!adet || !hasta || !tarih) {
+    alert("Lütfen tüm alanları doldurun.");
+    return;
+  }
+
+  const kalan = parseInt(selectedRow["Stok Adedi"]) - adet;
+  if (kalan < 0) {
+    alert("⚠️ Bu kadar stok yok. Lütfen kontrol edin.");
+    return;
+  }
+
+  const onay = confirm(`${selectedRow["İlaç Adı / Dozaj"]} adlı ilaçtan ${adet} adet düşülecek. Emin misiniz?`);
+  if (!onay) return;
+
+  const body = {
+    "Son Kullanım Tarihi": selectedRow["Son Kullanım Tarihi"],
+    "İlaç Adı / Dozaj": selectedRow["İlaç Adı / Dozaj"],
+    "Etken Madde / Dozaj": selectedRow["Etken Madde / Dozaj"],
+    "Stok Adedi": kalan,
+    "Ana Grup (ASTIM / KOAH vs)": selectedRow["Ana Grup (ASTIM / KOAH vs)"],
+    "KÜB / KT Linki": selectedRow["KÜB / KT Linki"],
+    "Verilen Tarih": tarih,
+    "Verilen Hasta": hasta
+  };
+
+  fetch(api, {
+    method: "POST",
+    body: JSON.stringify(body)
+  }).then(r => r.text()).then(msg => {
+    document.getElementById("statusMsg").innerText = "✅ " + msg;
+    document.getElementById("formSection").style.display = "none";
+    loadTable();
+  });
+}
+
+loadTable();
+</script>
+
+</body>
+</html>
